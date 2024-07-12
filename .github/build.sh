@@ -19,7 +19,6 @@ source "$SCRIPT_DIR/helper.sh";
 
 # Specify the root path of the project.
 PROJECT_PATH=$(pwd);
-BIN_PATH="$PROJECT_PATH/bin";
 
 # Build 'matrixmath_serializer' project.
 #

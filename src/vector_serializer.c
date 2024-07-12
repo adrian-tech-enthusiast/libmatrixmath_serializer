@@ -1,6 +1,5 @@
-#include <stdlib.h>
+#include <stddef.h>
 #include <json.h>
-#include <stdio.h>
 #include <strutils.h>
 #include "../include/matrixmath_serializer.h"
 
