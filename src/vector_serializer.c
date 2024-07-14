@@ -7,13 +7,30 @@
  * {@inheritdoc}
  */
 char *vector_serialize(struct vector *object) {
+  // Generates a JSON representation of the given Vector object.
+  struct json *jobject = vector_serialize_to_json(object);
+  if (jobject == NULL) {
+    return NULL;
+  }
+  // Encode the JSON object.
+  char *jstring = json_encode(jobject);
+  // Clean up JSON array object after encoding.
+  json_destroy(jobject);
+  // Returning the JSON string.
+  return jstring;
+}
+
+/**
+ * {@inheritdoc}
+ */
+struct json *vector_serialize_to_json(struct vector *object) {
   // Check if NULL vector object passed for serialization.
   if (object == NULL) {
     return NULL;
   }
-  // Create JSON array container.
-  struct json *container = json_array();
-  if (container == NULL) {
+  // Create JSON array object.
+  struct json *jobject = json_array();
+  if (jobject == NULL) {
     return NULL;
   }
   long double *lvalue;
@@ -21,21 +38,18 @@ char *vector_serialize(struct vector *object) {
   for (int i = 0; i < object->capacity; i++) {
     lvalue = vector_getl(object, i);
     if (lvalue == NULL) {
-      json_destroy(container);
+      json_destroy(jobject);
       return NULL;
     }
     jvalue = json_number_string(*lvalue);
     if (jvalue == NULL) {
-      json_destroy(container);
+      json_destroy(jobject);
       return NULL;
     }
-    json_push(container, jvalue);
+    json_push(jobject, jvalue);
   }
-  char *json_string = json_encode(container);
-  // Clean up JSON container after encoding.
-  json_destroy(container);
-  // Returning the JSON string.
-  return json_string;
+  // Returning the JSON object.
+  return jobject;
 }
 
 /**

@@ -7,22 +7,39 @@
  * {@inheritdoc}
  */
 char *matrix_serialize(struct matrix *object) {
+  // Generates a JSON representation of the given Matrix object.
+  struct json *jobject = matrix_serialize_to_json(object);
+  if (jobject == NULL) {
+    return NULL;
+  }
+  // Encode the JSON Matrix representation into a string.
+  char *json_string = json_encode(jobject);
+  // Clean up JSON Matrix object after encoding.
+  json_destroy(jobject);
+  // Returning the JSON string.
+  return json_string;
+}
+
+/**
+ * {@inheritdoc}
+ */
+struct json *matrix_serialize_to_json(struct matrix *object) {
   // Check if NULL matrix object passed for serialization.
   if (object == NULL) {
     return NULL;
   }
-  // Create JSON array container.
-  struct json *container = json_array();
-  if (container == NULL) {
+  // Create JSON array jobject.
+  struct json *jobject = json_array();
+  if (jobject == NULL) {
     return NULL;
   }
-  // Fill the container with matrix values.
+  // Fill the jobject with matrix values.
   long double *lvalue;
   struct json *jvalue;
   for (int j = 0; j < object->rows; j++) {
     struct json *row_items = json_array();
     if (row_items == NULL) {
-      json_destroy(container);
+      json_destroy(jobject);
       return NULL;
     }
     for (int k = 0; k < object->columns; k++) {
@@ -30,19 +47,15 @@ char *matrix_serialize(struct matrix *object) {
       jvalue = json_number_string(*lvalue);
       if (jvalue == NULL) {
         json_destroy(row_items);
-        json_destroy(container);
+        json_destroy(jobject);
         return NULL;
       }
       json_push(row_items, jvalue);
     }
-    json_push(container, row_items);
+    json_push(jobject, row_items);
   }
-  // Encode the JSON container into a string.
-  char *json_string = json_encode(container);
-  // Clean up JSON container after encoding.
-  json_destroy(container);
-  // Returning the JSON string.
-  return json_string;
+  // Returning the JSON object.
+  return jobject;
 }
 
 /**
