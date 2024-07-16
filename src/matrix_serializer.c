@@ -61,6 +61,25 @@ struct json *matrix_serialize_to_json(struct matrix *object) {
 /**
  * {@inheritdoc}
  */
+struct json *matrix_serialize_to_json_object(const char *key, struct matrix *object) {
+  // Serialize the matrix to JSON.
+  struct json *jmatrix = matrix_serialize_to_json(object);
+  if (jmatrix == NULL) {
+    return NULL;
+  }
+  // Create a JSON object with the given key and serialized matrix.
+  struct json *jobject = json_object(key, jmatrix);
+  if (jobject == NULL) {
+    json_destroy(jmatrix);
+    return NULL;
+  }
+  // Return the JSON object.
+  return jobject;
+}
+
+/**
+ * {@inheritdoc}
+ */
 struct matrix *matrix_unserialize(char *data) {
   // Check if NULL JSON data passed for unserialization.
   if (data == NULL) {

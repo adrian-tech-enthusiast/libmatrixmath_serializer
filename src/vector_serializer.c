@@ -55,6 +55,25 @@ struct json *vector_serialize_to_json(struct vector *object) {
 /**
  * {@inheritdoc}
  */
+struct json *vector_serialize_to_json_object(const char *key, struct vector *object) {
+  // Serialize the vector to JSON.
+  struct json *jvector = vector_serialize_to_json(object);
+  if (jvector == NULL) {
+    return NULL;
+  }
+  // Create a JSON object with the given key and serialized vector.
+  struct json *jobject = json_object(key, jvector);
+  if (jobject == NULL) {
+    json_destroy(jvector);
+    return NULL;
+  }
+  // Return the JSON object.
+  return jobject;
+}
+
+/**
+ * {@inheritdoc}
+ */
 struct vector *vector_unserialize(char *data) {
   // Check if NULL JSON data passed for unserialization.
   if (data == NULL) {
