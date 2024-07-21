@@ -47,7 +47,7 @@ struct json *vector_serialize_to_json(struct vector *object);
 struct json *vector_serialize_to_json_object(const char *key, struct vector *object);
 
 /**
- * Creates a Vector object object from the given serialized data string.
+ * Creates a Vector object from the given serialized data string.
  *
  * @param char* data
  *   The serialized string.
@@ -56,6 +56,17 @@ struct json *vector_serialize_to_json_object(const char *key, struct vector *obj
  *   The unserialize Vector object object is returned, otherwise NULL.
  */
 struct vector *vector_unserialize(char *data);
+
+/**
+ * Unserializes a JSON object into a vector object.
+ *
+ * @param struct json *jobject
+ *   Pointer to the JSON object representing the vector.
+ *
+ * @return struct vector*
+ *   Returns a pointer to the newly created vector object, or NULL if the conversion failed.
+ */
+struct vector *vector_unserialize_from_json_object(struct json *jobject);
 
 #endif // VECTOR_SERIALIZER_H
 
@@ -114,5 +125,16 @@ struct json *matrix_serialize_to_json_object(const char *key, struct matrix *obj
  *   The unserialize Matrix object object is returned, otherwise NULL.
  */
 struct matrix *matrix_unserialize(char *data);
+
+/**
+ * Unserializes a JSON object into a matrix object.
+ *
+ * @param struct json *jobject
+ *   Pointer to the JSON object representing the matrix.
+ *
+ * @return struct matrix*
+ *   Returns a pointer to the newly created matrix object, or NULL if the conversion failed.
+ */
+struct matrix *matrix_unserialize_from_json_object(struct json *jobject);
 
 #endif // MATRIX_SERIALIZER_H

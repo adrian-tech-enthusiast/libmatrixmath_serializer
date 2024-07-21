@@ -74,25 +74,20 @@ struct json *vector_serialize_to_json_object(const char *key, struct vector *obj
 /**
  * {@inheritdoc}
  */
-struct vector *vector_unserialize(char *data) {
-  // Check if NULL JSON data passed for unserialization.
-  if (data == NULL) {
-    return NULL;
-  }
-  // Decodes the given JSON array string.
-  struct json *container = json_decode(data);
-  if (container == NULL) {
+struct vector *vector_unserialize_from_json_object(struct json *jobject) {
+  // Validates the input.
+  if (jobject == NULL) {
     return NULL;
   }
   // Check if the data passed is a JSON array.
-  if (container->type != JSON_array) {
-    json_destroy(container);
+  if (jobject->type != JSON_array) {
+    json_destroy(jobject);
     return NULL;
   }
   // Check if the JSON array is empty.
-  struct json *current = container->value;
+  struct json *current = jobject->value;
   if (current == NULL) {
-    json_destroy(container);
+    json_destroy(jobject);
     return NULL;
   }
   // Calculate the capacity of the vector.
@@ -105,13 +100,13 @@ struct vector *vector_unserialize(char *data) {
   }
   // Verify if the array contains only numeric values (no null values).
   if (capacity == 0) {
-    json_destroy(container);
+    json_destroy(jobject);
     return NULL;
   }
   // Create the vector.
   struct vector *vector_object = vector_create(capacity);
   if (vector_object == NULL) {
-    json_destroy(container);
+    json_destroy(jobject);
     return NULL;
   }
   // Fill the vector.
@@ -128,8 +123,31 @@ struct vector *vector_unserialize(char *data) {
     // Increment the index.
     index++;
   }
-  // Clean up JSON container after unserializing.
-  json_destroy(container);
+  // Return the vector object.
+  return vector_object;
+}
+
+/**
+ * {@inheritdoc}
+ */
+struct vector *vector_unserialize(char *data) {
+  // Check if NULL JSON data passed for unserialization.
+  if (data == NULL) {
+    return NULL;
+  }
+  // Decodes the given JSON array string.
+  struct json *jobject = json_decode(data);
+  if (jobject == NULL) {
+    return NULL;
+  }
+  // Unserialize the JSON object.
+  struct vector *vector_object = vector_unserialize_from_json_object(jobject);
+  if (vector_object == NULL) {
+    json_destroy(jobject);
+    return NULL;
+  }
+  // Clean up JSON object after unserializing.
+  json_destroy(jobject);
   // Return the vector object.
   return vector_object;
 }
