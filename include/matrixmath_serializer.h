@@ -68,6 +68,39 @@ struct vector *vector_unserialize(char *data);
  */
 struct vector *vector_unserialize_from_json_object(struct json *jobject);
 
+/**
+ * Finds and unserializes a vector from a JSON object.
+ *
+ * This function retrieves a vector from the JSON object based on the provided key.
+ *
+ * @param const char *key
+ *   Key of the vector to find in the JSON object.
+ * @param struct json *json_object
+ *   Pointer to the JSON object containing the vectors.
+ *
+ * @return struct vector*
+ *   Pointer to the unserialized vector, or NULL if the operation failed.
+ */
+struct vector *vector_get_and_unserialize_from_json_object(const char *key, struct json *json_object);
+
+/**
+ * Retrieves and unserializes a vector from a JSON object, then sets it to the destination vector.
+ *
+ * This function retrieves a vector from the JSON object, unserializes it, and copies its contents
+ * to the destination vector.
+ *
+ * @param struct vector *destination
+ *   Pointer to the destination vector where the unserialized data will be stored.
+ * @param const char *key
+ *   Key of the vector to find in the JSON object.
+ * @param struct json *json_object
+ *   Pointer to the JSON object containing the vectors.
+ *
+ * @return int
+ *   Returns 0 if successful, otherwise 1 if an error occurred.
+ */
+int vector_set_from_json_object(struct vector *destination, const char *key, struct json *json_object);
+
 #endif // VECTOR_SERIALIZER_H
 
 #ifndef MATRIX_SERIALIZER_H
@@ -136,5 +169,38 @@ struct matrix *matrix_unserialize(char *data);
  *   Returns a pointer to the newly created matrix object, or NULL if the conversion failed.
  */
 struct matrix *matrix_unserialize_from_json_object(struct json *jobject);
+
+/**
+ * Finds and unserializes a matrix from a JSON object.
+ *
+ * This function retrieves a matrix from the JSON object based on the provided key.
+ *
+ * @param const char *key
+ *   Key of the matrix to find in the JSON object.
+ * @param struct json *json_object
+ *   Pointer to the JSON object containing the matrices.
+ *
+ * @return struct matrix*
+ *   Pointer to the unserialized matrix, or NULL if the operation failed.
+ */
+struct matrix *matrix_get_and_unserialize_from_json_object(const char *key, struct json *json_object);
+
+/**
+ * Retrieves and unserializes a matrix from a JSON object, then sets it to the destination matrix.
+ *
+ * This function retrieves a matrix from the JSON object, unserializes it, and copies its contents
+ * to the destination matrix.
+ *
+ * @param struct matrix *destination
+ *   Pointer to the destination matrix where the unserialized data will be stored.
+ * @param const char *key
+ *   Key of the matrix to find in the JSON object.
+ * @param struct json *json_object
+ *   Pointer to the JSON object containing the matrices.
+ *
+ * @return int
+ *   Returns 0 if successful, otherwise 1 if an error occurred.
+ */
+int matrix_set_from_json_object(struct matrix *destination, const char *key, struct json *json_object);
 
 #endif // MATRIX_SERIALIZER_H

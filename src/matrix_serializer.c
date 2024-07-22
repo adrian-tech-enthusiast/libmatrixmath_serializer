@@ -181,3 +181,36 @@ struct matrix *matrix_unserialize(char *data) {
   // Return the matrix object.
   return matrix_object;
 }
+
+/**
+ * {@inheritdoc}
+ */
+struct matrix *matrix_get_and_unserialize_from_json_object(const char *key, struct json *json_object) {
+  // Get the JSON array associated with the key.
+  struct json *json_array = json_get_array(json_object, key);
+  if (json_array == NULL) {
+    return NULL;
+  }
+  // Return the unserialized matrix object.
+  return matrix_unserialize_from_json_object(json_array);
+}
+
+/**
+ * {@inheritdoc}
+ */
+int matrix_set_from_json_object(struct matrix *destination, const char *key, struct json *json_object) {
+  // Retrieve and unserialize the matrix from the JSON object.
+  struct matrix *source = matrix_get_and_unserialize_from_json_object(key, json_object);
+  if (source == NULL) {
+    return 1;
+  }
+  // Try to copy the source matrix into the destination matrix.
+  if (matrix_copy(source, destination) == 1) {
+    matrix_destroy(source);
+    return 1;
+  }
+  // Free memory.
+  matrix_destroy(source);
+  // Operation successfully completed.
+  return 0;
+}

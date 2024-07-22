@@ -151,3 +151,36 @@ struct vector *vector_unserialize(char *data) {
   // Return the vector object.
   return vector_object;
 }
+
+/**
+ * {@inheritdoc}
+ */
+struct vector *vector_get_and_unserialize_from_json_object(const char *key, struct json *json_object) {
+  // Get the JSON array associated with the key.
+  struct json *json_array = json_get_array(json_object, key);
+  if (json_array == NULL) {
+    return NULL;
+  }
+  // Return the unserialized vector object.
+  return vector_unserialize_from_json_object(json_array);
+}
+
+/**
+ * {@inheritdoc}
+ */
+int vector_set_from_json_object(struct vector *destination, const char *key, struct json *json_object) {
+  // Retrieve and unserialize the vector from the JSON object.
+  struct vector *source = vector_get_and_unserialize_from_json_object(key, json_object);
+  if (source == NULL) {
+    return 1;
+  }
+  // Try to copy the source vector into the destination vector.
+  if (vector_copy(source, destination) == 1) {
+    vector_destroy(source);
+    return 1;
+  }
+  // Free memory.
+  vector_destroy(source);
+  // Operation successfully completed.
+  return 0;
+}
