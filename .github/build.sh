@@ -43,7 +43,7 @@ build_matrixmath_serializer_project() {
 
 # Ensure that library dependencies are installed on the local system.
 if ! [ -f /usr/local/lib/libmatrixmath.so ] || ! [ -f /usr/local/lib/libstr.so ] || ! [ -f /usr/local/lib/libjson.so ]; then
-  sudo "$SCRIPT_DIR/install_from_remote.sh" >> /dev/null;
+  sudo "$SCRIPT_DIR/install_from_remote.sh";
 fi
 
 # Build 'matrixmath_serializer' project.
