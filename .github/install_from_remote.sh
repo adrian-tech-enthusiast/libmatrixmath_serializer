@@ -23,6 +23,9 @@ install_dependencies_from_remote() {
 
    # Install 'libjson' library dependency locally from remote(Github repo).
    install_library_from_remote "adrian-tech-enthusiast" "libjson" "v1.1.0" "libjson.so" "json.h";
+
+   # Install 'libfile' library dependency locally from remote(Github repo).
+   install_library_from_remote "adrian-tech-enthusiast" "libfile" "v1.0.1" "libfile.so" "filehelper.h";
 }
 
 # Call the function.
