@@ -262,10 +262,8 @@ install_library_from_remote() {
 
   # Download the shared library.
   echo "Downloading $library_name";
-  if curl -L "$lib_url" -o "$temp_lib_path"; then
+  if curl -L -f "$lib_url" -o "$temp_lib_path"; then
     mv "$temp_lib_path" "$lib_dest_path";
-    ldconfig;
-    ldconfig -p | grep "${library_name%.so}";
   else
     echo "Error: Failed to download $library_name";
     rm -f "$temp_lib_path";
@@ -274,14 +272,16 @@ install_library_from_remote() {
 
   # Download the header file.
   echo "Downloading $header_name";
-  if curl -L "$header_url" -o "$temp_header_path"; then
+  if curl -L -f "$header_url" -o "$temp_header_path"; then
     mv "$temp_header_path" "$header_dest_path";
   else
     echo "Error: Failed to download $header_name";
     rm -f "$temp_header_path";
     exit 1;
   fi
-
+  # Cler the loader cache.
+  ldconfig;
+  ldconfig -p | grep "${library_name%.so}";
   # Cleanup temporary files.
   rm -f "$temp_lib_path" "$temp_header_path";
 }
