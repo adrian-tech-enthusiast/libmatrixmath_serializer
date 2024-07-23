@@ -16,13 +16,13 @@ source "$SCRIPT_DIR/helper.sh";
 # Ensure that library dependencies are installed on the local system.
 install_dependencies_from_remote() {
    # Install 'libmatrixmath' library dependency locally from remote(Github repo).
-   install_library_from_remote "adrian-tech-enthusiast" "libmatrixmath" "v1.1.1" "libmatrixmath.so" "matrixmath.h";
+   install_library_from_remote "adrian-tech-enthusiast" "libmatrixmath" "v1.1.5" "libmatrixmath.so" "matrixmath.h";
 
    # Install 'lstr' library dependency locally from remote(Github repo).
-   install_library_from_remote "adrian-tech-enthusiast" "lstr" "v1.0.1" "libstr.so" "strutils.h";
+   install_library_from_remote "adrian-tech-enthusiast" "lstr" "v1.1.0" "libstr.so" "strutils.h";
 
    # Install 'libjson' library dependency locally from remote(Github repo).
-   install_library_from_remote "adrian-tech-enthusiast" "libjson" "v1.0.0" "libjson.so" "json.h";
+   install_library_from_remote "adrian-tech-enthusiast" "libjson" "v1.1.0" "libjson.so" "json.h";
 }
 
 # Call the function.

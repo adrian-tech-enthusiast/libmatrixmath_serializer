@@ -8,16 +8,16 @@ The Vector and Matrix Serializer Library is a C library designed to provide seri
 - **Matrix Serialization**: Convert matrix objects to and from string representations.
 - **Ease of Use**: : Simple API for integrating serialization functionality into your projects.
 - **Documentation**: Comprehensive documentation and examples are provided to help you get started quickly and easily.
-- **Compatibility**: Depends on the [libmatrixmath_serializer](https://github.com/adrian-tech-enthusiast/libmatrixmath_serializer) library for mathematical operations on vectors and matrices.
+- **Compatibility**: Depends on the [libmatrixmath](https://github.com/adrian-tech-enthusiast/libmatrixmath) library for mathematical operations on vectors and matrices.
 - **Open Source**: The library is open source and actively maintained, allowing for community contributions and enhancements.
 
 ### Prerequisites
 
 Before installing Lib Matrix Math Serializer, ensure you have the following libraries installed:
 
-1. [**Lib Matrix Math (libmatrixmath)**](https://github.com/adrian-tech-enthusiast/libmatrixmath?tab=readme-ov-file#installation) [v1.1.0](https://github.com/adrian-tech-enthusiast/libstr/releases/tag/v1.1.0) or later - Offers a robust collection of functions designed for efficient manipulation of vectors and matrices.
-2. [**Lib Strutils (libstr)**](https://github.com/adrian-tech-enthusiast/libstr?tab=readme-ov-file#installation) [v1.0.1](https://github.com/adrian-tech-enthusiast/libstr/releases/tag/v1.0.1) or later - Offers a robust collection of functions designed for efficient manipulation of character arrays.
-3. [**Lib JSON (libjson)**](https://github.com/adrian-tech-enthusiast/libjson?tab=readme-ov-file#installation) [v1.0.0](https://github.com/adrian-tech-enthusiast/libjson/releases/tag/v1.0.0) or later - Provides efficient JSON parsing, useful for encoding and decoding JSON objects.
+1. [**Lib Matrix Math (libmatrixmath)**](https://github.com/adrian-tech-enthusiast/libmatrixmath?tab=readme-ov-file#installation) [v1.1.5](https://github.com/adrian-tech-enthusiast/libmatrixmath/releases/tag/v1.1.5) or later - Offers a robust collection of functions designed for efficient manipulation of vectors and matrices.
+2. [**Lib Strutils (libstr)**](https://github.com/adrian-tech-enthusiast/libstr?tab=readme-ov-file#installation) [v1.1.0](https://github.com/adrian-tech-enthusiast/libstr/releases/tag/v1.1.0) or later - Offers a robust collection of functions designed for efficient manipulation of character arrays.
+3. [**Lib JSON (libjson)**](https://github.com/adrian-tech-enthusiast/libjson?tab=readme-ov-file#installation) [v1.1.0](https://github.com/adrian-tech-enthusiast/libjson/releases/tag/v1.1.0) or later - Provides efficient JSON parsing, useful for encoding and decoding JSON objects.
 
 ### Getting Started
 
